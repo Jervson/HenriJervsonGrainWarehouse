@@ -1,32 +1,39 @@
-﻿using HenriJervsonGrainWarehouse.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HenriJervsonGrainWarehouse.Controllers
+namespace HenriJervsonGrainWarehouse
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly CargoRepository _cargoRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CargoRepository cargoRepository)
         {
-            _logger = logger;
+            _cargoRepository = cargoRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cargo = _cargoRepository.GetAllCargo()
+                .Select(c => new CargoViewModel
+                {
+                    Id = c.Id,
+                    CarNumber = c.CarNumber,
+                    EnteringMass = c.EnteringMass,
+                    LeavingMasses = _cargoRepository.GetLeavingMassesForCargo(c.Id)
+                })
+                .ToList();
+            return View(cargo);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult UpdateCargoLeavingMass(int id, double leavingMass)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _cargoRepository.UpdateCargoLeavingMass(id, leavingMass);
+            return RedirectToAction("Index");
         }
     }
+
 }
