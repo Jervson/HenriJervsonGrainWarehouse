@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HenriJervsonGrainWarehouse.Models.Cargo>
+
+@{
+    ViewData["Title"] = "Repository";
+}
+
+<h1>Repository</h1>
+<h4>All Data about Entering And Leaving Cargo Is Shown Here</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnteringMass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeavingMass)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnteringMass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeavingMass)
+                </td>
+                <td>
+                    <a asp-controller="CargoRepository" asp-action="GetAllCargo">Use Account</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

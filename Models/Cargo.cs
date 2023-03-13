@@ -1,4 +1,4 @@
-﻿namespace HenriJervsonGrainWarehouse
+﻿namespace HenriJervsonGrainWarehouse.Models
 {
     public class Cargo
     {
@@ -6,6 +6,5 @@
         public string CarNumber { get; set; }
         public double EnteringMass { get; set; }
         public double? LeavingMass { get; set; }
-        // kodpkpdok
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace HenriJervsonGrainWarehouse
+﻿namespace HenriJervsonGrainWarehouse.Models
 {
     public class CargoViewModel
     {

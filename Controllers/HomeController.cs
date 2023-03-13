@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using HenriJervsonGrainWarehouse;
 
 namespace HenriJervsonGrainWarehouse
 {
+    using HenriJervsonGrainWarehouse.Controllers;
+    using HenriJervsonGrainWarehouse.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Linq;
 
     public class HomeController : Controller
     {
-        private readonly CargoRepository _cargoRepository;
+        private readonly CargoRepositoryController _cargoRepository;
 
-        public HomeController(CargoRepository cargoRepository)
+        public HomeController(CargoRepositoryController cargoRepository)
         {
             _cargoRepository = cargoRepository;
         }
@@ -33,6 +36,10 @@ namespace HenriJervsonGrainWarehouse
         {
             _cargoRepository.UpdateCargoLeavingMass(id, leavingMass);
             return RedirectToAction("Index");
+        }
+        public IActionResult Privacy()
+        {
+            return View();
         }
     }
 

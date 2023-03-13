@@ -1,0 +1,31 @@
+﻿@model HenriJervsonGrainWarehouse.Models.Cargo
+
+@{
+    ViewData["Title"] = "AddMass";
+}
+
+<h1>AddCargo</h1>
+
+<h4>Fill in the blanks</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCargo">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CarNumber" class="control-label"></label>
+                <input asp-for="CarNumber" class="form-control" />
+                <span asp-validation-for="CarNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnteringMass" class="control-label"></label>
+                <input asp-for="EnteringMass" class="form-control" />
+                <span asp-validation-for="EnteringMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="AddCargo" class="btn btn-primary" />
+                <a asp-action="AddCargo"></a>
+            </div>
+        </form>
+    </div>
+</div>

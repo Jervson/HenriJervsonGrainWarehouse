@@ -3,21 +3,33 @@
 namespace HenriJervsonGrainWarehouse
 {
     using Microsoft.AspNetCore.Mvc;
+    using HenriJervsonGrainWarehouse.Data;
+    using Microsoft.EntityFrameworkCore;
+    using HenriJervsonGrainWarehouse.Controllers;
 
     public class CargoController : Controller
     {
-        private readonly CargoRepository _cargoRepository;
+        private readonly CargoRepositoryController _cargoRepository;
 
-        public CargoController(CargoRepository cargoRepository)
+        public CargoController(CargoRepositoryController cargoRepository)
         {
             _cargoRepository = cargoRepository;
         }
 
         [HttpPost]
-        public IActionResult AddCargo(string carNumber, double enteringMass)
+        public IActionResult AddCargo()
         {
-            _cargoRepository.AddCargo(carNumber, enteringMass);
-            return RedirectToAction("Index", "Home");
+            return View();
+        }
+        public async Task<IActionResult> AddCargo(string carNumber, double enteringMass)
+        {
+            if (ModelState.IsValid)
+            {
+                _cargoRepository.AddCargo(carNumber, enteringMass);
+                return RedirectToAction("Index", "Home");
+
+            }
+            return View();
         }
 
         [HttpPost]

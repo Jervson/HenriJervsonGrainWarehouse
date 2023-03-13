@@ -1,14 +1,18 @@
-﻿namespace HenriJervsonGrainWarehouse
+﻿using HenriJervsonGrainWarehouse.Models;
+
+namespace HenriJervsonGrainWarehouse.Controllers
 {
+    using System;
+    using HenriJervsonGrainWarehouse.Data;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class CargoRepository
+    public class CargoRepositoryController
     {
         private readonly MyDbContext _context;
 
-        public CargoRepository(DbContextOptions<MyDbContext> options)
+        public CargoRepositoryController(DbContextOptions<MyDbContext> options)
         {
             _context = new MyDbContext(options);
         }
@@ -37,7 +41,7 @@
             {
                 return db.Cargo
                     .Where(c => c.Id == carId)
-                    .Select(c => (double?)c.LeavingMass)
+                    .Select(c => c.LeavingMass)
                     .ToList();
             }
         }

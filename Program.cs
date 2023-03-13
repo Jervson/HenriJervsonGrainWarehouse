@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HenriJervsonGrainWarehouse;
+using HenriJervsonGrainWarehouse.Data;
+using HenriJervsonGrainWarehouse.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionString")));
-builder.Services.AddScoped<CargoRepository>(provider =>
+builder.Services.AddScoped<CargoRepositoryController>(provider =>
 {
     var options = provider.GetRequiredService<DbContextOptions<MyDbContext>>();
-    return new CargoRepository(options);
+    return new CargoRepositoryController(options);
 });
 
 var app = builder.Build();
