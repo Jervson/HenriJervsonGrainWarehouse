@@ -1,6 +1,6 @@
-﻿using HenriJervsonGrainWarehouse.Models;
+﻿using HenriJervsonGrainWarehouse;
 
-namespace HenriJervsonGrainWarehouse.Controllers
+namespace HenriJervsonGrainWarehouse.Models
 {
     using System;
     using HenriJervsonGrainWarehouse.Data;
@@ -8,11 +8,11 @@ namespace HenriJervsonGrainWarehouse.Controllers
     using System.Collections.Generic;
     using System.Linq;
 
-    public class CargoRepositoryController
+    public class CargoRepository
     {
         private readonly MyDbContext _context;
 
-        public CargoRepositoryController(DbContextOptions<MyDbContext> options)
+        public CargoRepository(DbContextOptions<MyDbContext> options)
         {
             _context = new MyDbContext(options);
         }

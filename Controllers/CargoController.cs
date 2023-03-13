@@ -2,16 +2,17 @@
 
 namespace HenriJervsonGrainWarehouse
 {
+    using HenriJervsonGrainWarehouse;
+    using HenriJervsonGrainWarehouse.Models;
     using Microsoft.AspNetCore.Mvc;
     using HenriJervsonGrainWarehouse.Data;
     using Microsoft.EntityFrameworkCore;
-    using HenriJervsonGrainWarehouse.Controllers;
 
     public class CargoController : Controller
     {
-        private readonly CargoRepositoryController _cargoRepository;
+        private readonly CargoRepository _cargoRepository;
 
-        public CargoController(CargoRepositoryController cargoRepository)
+        public CargoController(CargoRepository cargoRepository)
         {
             _cargoRepository = cargoRepository;
         }

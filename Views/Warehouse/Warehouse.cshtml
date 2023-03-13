@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<HenriJervsonGrainWarehouse.Models.Cargo>
 
 @{
-    ViewData["Title"] = "Repository";
+    ViewData["Title"] = "Warehouse";
 }
 
-<h1>Repository</h1>
+<h1>Warehouse</h1>
 <h4>All Data about Entering And Leaving Cargo Is Shown Here</h4>
 
 
@@ -37,8 +37,7 @@
                     @Html.DisplayFor(modelItem => item.LeavingMass)
                 </td>
                 <td>
-                    <a asp-controller="CargoRepository" asp-action="GetAllCargo">Use Account</a>
-
+                    <a asp-action="GetAllCargo"></a>
                 </td>
             </tr>
         }

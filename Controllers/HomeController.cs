@@ -3,16 +3,16 @@ using HenriJervsonGrainWarehouse;
 
 namespace HenriJervsonGrainWarehouse
 {
-    using HenriJervsonGrainWarehouse.Controllers;
+    using HenriJervsonGrainWarehouse;
     using HenriJervsonGrainWarehouse.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Linq;
 
     public class HomeController : Controller
     {
-        private readonly CargoRepositoryController _cargoRepository;
+        private readonly CargoRepository _cargoRepository;
 
-        public HomeController(CargoRepositoryController cargoRepository)
+        public HomeController(CargoRepository cargoRepository)
         {
             _cargoRepository = cargoRepository;
         }
