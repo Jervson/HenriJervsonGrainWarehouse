@@ -27,6 +27,17 @@ namespace HenriJervsonGrainWarehouse.Models
             _context.Cargo.Add(cargo);
             _context.SaveChanges();
         }
+        public void Warehouse(string carNumber, double enteringMass, double leavingMass)
+        {
+            var cargo = new Cargo
+            {
+                CarNumber = carNumber,
+                EnteringMass = enteringMass,
+                LeavingMass = leavingMass
+            };
+            _context.Cargo.Add(cargo);
+            _context.SaveChanges();
+        }
 
         public void UpdateCargoLeavingMass(int id, double leavingMass)
         {
