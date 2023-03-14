@@ -7,6 +7,7 @@ namespace HenriJervsonGrainWarehouse.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            Console.WriteLine("SeedData Initialize method called."); // Debugging code
             using (var context = new MyDbContext(
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MyDbContext>>()))
@@ -23,7 +24,7 @@ namespace HenriJervsonGrainWarehouse.Models
                         CarNumber = "abc123",
                         EnteringMass = 165,
                         LeavingMass = 150
-                    }                   
+                    }
                 );
                 context.SaveChanges();
             }

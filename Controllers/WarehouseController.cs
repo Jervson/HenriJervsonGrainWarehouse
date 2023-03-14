@@ -15,13 +15,15 @@ namespace HenriJervsonGrainWarehouse.Controllers
     {
         private readonly MyDbContext _context;
         private readonly CargoRepository _cargoRepository;
-        public WarehouseController(CargoRepository cargoRepository)
+
+        public WarehouseController(MyDbContext context, CargoRepository cargoRepository)
         {
+            _context = context;
             _cargoRepository = cargoRepository;
         }
 
         // GET: Warehouse
-        
+
 
         // POST: Warehouse/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -40,7 +42,7 @@ namespace HenriJervsonGrainWarehouse.Controllers
         }
         private bool CargoExists(int id)
         {
-          return _context.Cargo.Any(e => e.Id == id);
+            return _context.Cargo.Any(e => e.Id == id);
         }
         public IActionResult GetAllCargo()
         {
@@ -57,16 +59,23 @@ namespace HenriJervsonGrainWarehouse.Controllers
             }
             return View();
         }
+        public IActionResult Warehouse()
+        {
+            var cargoList = _context.Cargo.ToList();
+            return View(cargoList);
+        }
 
-        [HttpGet]
-        public IActionResult Warehouse(string carNumber, double enteringMass, double leavingMass)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Warehouse([Bind("id", "Carnumber", "EnteringMass", "LeavingMass")] Cargo cargo)
         {
             if (ModelState.IsValid)
             {
-                _cargoRepository.Warehouse(carNumber, enteringMass, leavingMass);
-
+                _context.Add(cargo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Warehouse));
             }
-            return View();
+            return View(cargo);
         }
 
     }
