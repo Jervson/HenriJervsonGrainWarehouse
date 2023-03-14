@@ -4,10 +4,8 @@
 
 namespace HenriJervsonGrainWarehouse.Migrations
 {
-    /// <inheritdoc />
     public partial class abc : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -26,7 +24,6 @@ namespace HenriJervsonGrainWarehouse.Migrations
                 });
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

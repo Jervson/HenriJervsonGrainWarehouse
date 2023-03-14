@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HenriJervsonGrainWarehouse.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230314221451_seeddata2")]
-    partial class seeddata2
+    [Migration("20230314222217_abc")]
+    partial class abc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
