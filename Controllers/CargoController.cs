@@ -34,10 +34,18 @@ namespace HenriJervsonGrainWarehouse
         }
 
         [HttpPost]
-        public IActionResult UpdateCargoLeavingMass(int id, double leavingMass)
+        public IActionResult UpdateCargoLeavingMass()
         {
-            _cargoRepository.UpdateCargoLeavingMass(id, leavingMass);
-            return RedirectToAction("Index", "Home");
+            return View();
+        }
+        public async Task<IActionResult> UpdateCargoLeavingMass(string carNumber, double leavingMass)
+        {
+            if (ModelState.IsValid)
+            {
+                _cargoRepository.UpdateCargoLeavingMass(carNumber, leavingMass);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
     }
 

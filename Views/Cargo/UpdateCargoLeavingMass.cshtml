@@ -1,0 +1,31 @@
+﻿@model HenriJervsonGrainWarehouse.Models.Cargo
+
+@{
+    ViewData["Title"] = "SendMass";
+}
+
+<h1>SendCargo</h1>
+
+<h4>Fill in the blanks</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateCargoLeavingMass">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CarNumber" class="control-label"></label>
+                <input asp-for="CarNumber" class="form-control" />
+                <span asp-validation-for="CarNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeavingMass" class="control-label"></label>
+                <input asp-for="LeavingMass" class="form-control" />
+                <span asp-validation-for="LeavingMass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="UpdateCargoLeavingMass" class="btn btn-primary" />
+                <a asp-action="UpdateCargoLeavingMass"></a>
+            </div>
+        </form>
+    </div>
+</div>
