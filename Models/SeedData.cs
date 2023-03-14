@@ -21,6 +21,7 @@ namespace HenriJervsonGrainWarehouse.Models
                 context.Cargo.AddRange(
                     new Cargo
                     {
+                        Id = 1,
                         CarNumber = "abc123",
                         EnteringMass = 165,
                         LeavingMass = 150
