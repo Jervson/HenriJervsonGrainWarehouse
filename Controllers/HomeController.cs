@@ -25,7 +25,6 @@ namespace HenriJervsonGrainWarehouse
                     Id = c.Id,
                     CarNumber = c.CarNumber,
                     EnteringMass = c.EnteringMass,
-                    LeavingMasses = _cargoRepository.GetLeavingMassesForCargo(c.Id)
                 })
                 .ToList();
             return View(cargo);
