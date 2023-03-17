@@ -44,21 +44,6 @@ namespace HenriJervsonGrainWarehouse.Controllers
         {
             return _context.Cargo.Any(e => e.Id == id);
         }
-        public IActionResult GetAllCargo()
-        {
-            return View();
-        }
-        public async Task<IActionResult> GetAllCargo(string carNumber, double EnteringMass, double LeavingMass)
-        {
-            if (ModelState.IsValid)
-            {
-                ViewData["carNumber"] = new SelectList(_context.Set<Cargo>(), "CarNumber");
-                ViewData["EnteringMass"] = new SelectList(_context.Set<Cargo>(), "EnteringMass");
-                ViewData["LeavingMass"] = new SelectList(_context.Set<Cargo>(), "LeavingMass");
-                return RedirectToAction("Index", "Home");
-            }
-            return View();
-        }
         public IActionResult Warehouse()
         {
             var cargoList = _context.Cargo.ToList();

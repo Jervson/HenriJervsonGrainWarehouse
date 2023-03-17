@@ -45,18 +45,6 @@ namespace HenriJervsonGrainWarehouse.Models
             cargo.LeavingMass = leavingMass;
             _context.SaveChanges();
         }
-
-        public List<double?> GetLeavingMassesForCargo(int carId)
-        {
-            using (var db = new MyDbContext(null))
-            {
-                return db.Cargo
-                    .Where(c => c.Id == carId)
-                    .Select(c => c.LeavingMass)
-                    .ToList();
-            }
-        }
-
         public List<Cargo> GetAllCargo()
         {
             return _context.Cargo.ToList();
