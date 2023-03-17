@@ -17,33 +17,33 @@ namespace HenriJervsonGrainWarehouse
             _cargoRepository = cargoRepository;
         }
 
-        [HttpPost]
         public IActionResult AddCargo()
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> AddCargo(string carNumber, double enteringMass)
         {
             if (ModelState.IsValid)
             {
                 _cargoRepository.AddCargo(carNumber, enteringMass);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction();
 
             }
             return View();
         }
-
-        [HttpPost]
         public IActionResult UpdateCargoLeavingMass()
         {
             return View();
         }
-        public async Task<IActionResult> UpdateCargoLeavingMass(string carNumber, double leavingMass)
+
+        [HttpPost]
+        public IActionResult UpdateCargoLeavingMass(string carNumber, double leavingMass)
         {
             if (ModelState.IsValid)
             {
                 _cargoRepository.UpdateCargoLeavingMass(carNumber, leavingMass);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction();
             }
             return View();
         }

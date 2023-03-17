@@ -41,7 +41,7 @@ namespace HenriJervsonGrainWarehouse.Models
 
         public void UpdateCargoLeavingMass(string carNumber, double leavingMass)
         {
-            var cargo = _context.Cargo.Find(carNumber);
+            var cargo = _context.Cargo.Where(x => x.CarNumber == carNumber).Where(y => y.LeavingMass == null).FirstOrDefault();
             cargo.LeavingMass = leavingMass;
             _context.SaveChanges();
         }
