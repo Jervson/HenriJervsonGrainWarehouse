@@ -7,13 +7,16 @@ namespace HenriJervsonGrainWarehouse
     using Microsoft.AspNetCore.Mvc;
     using HenriJervsonGrainWarehouse.Data;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class CargoController : Controller
     {
+        private readonly MyDbContext _context;
         private readonly CargoRepository _cargoRepository;
 
-        public CargoController(CargoRepository cargoRepository)
+        public CargoController(MyDbContext context, CargoRepository cargoRepository)
         {
+            _context = context;
             _cargoRepository = cargoRepository;
         }
 
@@ -38,8 +41,21 @@ namespace HenriJervsonGrainWarehouse
         }
 
         [HttpPost]
-        public IActionResult UpdateCargoLeavingMass(string carNumber, double leavingMass)
+        public async Task<IActionResult> UpdateCargoLeavingMass(string carNumber, double leavingMass)
         {
+                IQueryable<string> genreQuery = from m in _context.Cargo
+                                                orderby m.CarNumber
+                                                select m.CarNumber;
+
+                var cargos = from m in _context.Cargo
+                             select m;
+
+                var autoGenreVM = new WarehouseViewModel
+                {
+                    CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                    Cargo = await cargos.ToListAsync()
+                };
+            
             if (ModelState.IsValid)
             {
                 _cargoRepository.UpdateCargoLeavingMass(carNumber, leavingMass);
