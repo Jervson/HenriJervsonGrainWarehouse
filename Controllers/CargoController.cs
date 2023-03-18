@@ -50,7 +50,12 @@ namespace HenriJervsonGrainWarehouse
                 var cargos = from m in _context.Cargo
                              select m;
 
-                var autoGenreVM = new WarehouseViewModel
+            if (!string.IsNullOrEmpty(carNumber))
+            {
+                cargos = cargos.Where(x => x.CarNumber == carNumber);
+            }
+
+            var autoGenreVM = new WarehouseViewModel
                 {
                     CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
                     Cargo = await cargos.ToListAsync()
