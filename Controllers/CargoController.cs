@@ -58,7 +58,7 @@ namespace HenriJervsonGrainWarehouse
             var LeavingCargoVM = new WarehouseViewModel
                 {
                     CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                    Cargo = await cargos.ToListAsync()
+                    Cargos = await cargos.ToListAsync()
                 };
             
             if (ModelState.IsValid)

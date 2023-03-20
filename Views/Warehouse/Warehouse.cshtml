@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HenriJervsonGrainWarehouse.Models.Cargo>
+﻿@model HenriJervsonGrainWarehouse.Models.WarehouseViewModel
 
 @{
     ViewData["Title"] = "Warehouse";
@@ -7,39 +7,45 @@
 <h1>Warehouse</h1>
 <h4>All Data about Entering And Leaving Cargo Is Shown Here</h4>
 
+<form asp-controller="Warehouse" asp-action="Index" method="get">
+    <p>
+        <label for="CarNumber">Car Number:</label>
+        <select asp-for="CarNumber" asp-items="Model.CarNumber">
+            <option value="">All</option>
+        </select>
 
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CarNumber)
+                @Html.DisplayNameFor(model => model.Cargos![0].CarNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnteringMass)
+                @Html.DisplayNameFor(model => model.Cargos![0].EnteringMass)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeavingMass)
+                @Html.DisplayNameFor(model => model.Cargos![0].LeavingMass)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @if (Model != null)
+        @foreach (var item in Model.Cargos!)
         {
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CarNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EnteringMass)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeavingMass)
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnteringMass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeavingMass)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using HenriJervsonGrainWarehouse.Data;
 using HenriJervsonGrainWarehouse.Models;
 using System.Net.NetworkInformation;
+using System.Collections.Generic;
 
 namespace HenriJervsonGrainWarehouse.Controllers
 {
@@ -44,41 +44,33 @@ namespace HenriJervsonGrainWarehouse.Controllers
         {
             return _context.Cargo.Any(e => e.Id == id);
         }
-        public IActionResult Warehouse()
+        public async Task<IActionResult> Warehouse([Bind] string CarNumber)
         {
-            var cargoList = _context.Cargo.ToList();
-            return View(cargoList);
-        }
+            var applicationDbContext = _context
+                            .Cargo
+                            .Include(c => c.CarNumber)
+                            .Where(r => r.CarNumber == CarNumber);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Warehouse([Bind("id", "Carnumber", "EnteringMass", "LeavingMass")] Cargo cargo)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(cargo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Warehouse));
-            }
-            return View(cargo);
-        }
-        public async Task<IActionResult> Index(string CarNumber)
-        {
             IQueryable<string> genreQuery = from m in _context.Cargo
                                             orderby m.CarNumber
                                             select m.CarNumber;
-
             var cargos = from m in _context.Cargo
-                        select m;
+                         select m;
 
-            var autoGenreVM = new WarehouseViewModel
+            if (!string.IsNullOrEmpty(CarNumber))
+            {
+                cargos = cargos.Where(x => x.CarNumber == CarNumber);
+            }
+
+
+            var warehouseVM = new WarehouseViewModel
             {
                 CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Cargo = await cargos.ToListAsync()
+                Cargos = await cargos.ToListAsync()
+
             };
 
-            return View(autoGenreVM);
+            return View(warehouseVM);
         }
-
     }
 }
