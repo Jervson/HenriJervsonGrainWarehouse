@@ -7,7 +7,5 @@ namespace HenriJervsonGrainWarehouse.Models
     {
         public List<Cargo> Cargos { get; set; }
         public SelectList? CarNumber { get; set; }
-        public double? EnteringMass { get; set; }
-        public double? LeavingMass { get; set; }
     }
 }

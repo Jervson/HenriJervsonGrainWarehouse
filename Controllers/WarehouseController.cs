@@ -21,29 +21,7 @@ namespace HenriJervsonGrainWarehouse.Controllers
             _context = context;
             _cargoRepository = cargoRepository;
         }
-        [HttpGet]
-        public async Task<IActionResult> Index(string CarNumber)
-        {
-            IQueryable<string> genreQuery = from m in _context.Cargo
-                                            orderby m.CarNumber
-                                            select m.CarNumber;
 
-            var cargos = from m in _context.Cargo
-                        select m;
-
-            if (!string.IsNullOrEmpty(CarNumber))
-            {
-                cargos = cargos.Where(x => x.CarNumber == CarNumber);
-            }
-
-            var WarehouseVM = new WarehouseViewModel
-            {
-                CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Cargos = await cargos.ToListAsync()
-            };
-
-            return View(WarehouseVM);
-        }
         // GET: Warehouse
 
 
@@ -66,23 +44,33 @@ namespace HenriJervsonGrainWarehouse.Controllers
         {
             return _context.Cargo.Any(e => e.Id == id);
         }
-        public IActionResult Warehouse()
+        public async Task<IActionResult> Warehouse([Bind] string CarNumber)
         {
-            var cargoList = _context.Cargo.ToList();
-            return View(cargoList);
-        }
+            var applicationDbContext = _context
+                            .Cargo
+                            .Include(c => c.CarNumber)
+                            .Where(r => r.CarNumber == CarNumber);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Warehouse([Bind("id", "Carnumber", "EnteringMass", "LeavingMass")] Cargo cargo)
-        {
-            if (ModelState.IsValid)
+            IQueryable<string> genreQuery = from m in _context.Cargo
+                                            orderby m.CarNumber
+                                            select m.CarNumber;
+            var cargos = from m in _context.Cargo
+                                select m;
+
+            if (!string.IsNullOrEmpty(CarNumber))
             {
-                _context.Add(cargo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Warehouse));
+                cargos = cargos.Where(x => x.CarNumber == CarNumber);
             }
-            return View(cargo);
+
+
+            var warehouseVM = new WarehouseViewModel
+            {
+                CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Cargos = await cargos.ToListAsync()
+
+            };
+
+            return View(warehouseVM);
         }
     }
 }
