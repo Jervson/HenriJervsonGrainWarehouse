@@ -62,23 +62,5 @@ namespace HenriJervsonGrainWarehouse.Controllers
             }
             return View(cargo);
         }
-        public async Task<IActionResult> Index(string CarNumber)
-        {
-            IQueryable<string> genreQuery = from m in _context.Cargo
-                                            orderby m.CarNumber
-                                            select m.CarNumber;
-
-            var cargos = from m in _context.Cargo
-                        select m;
-
-            var autoGenreVM = new WarehouseViewModel
-            {
-                CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Cargo = await cargos.ToListAsync()
-            };
-
-            return View(autoGenreVM);
-        }
-
     }
 }

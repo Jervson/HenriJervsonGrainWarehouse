@@ -1,4 +1,4 @@
-﻿@model HenriJervsonGrainWarehouse.Models.WarehouseViewModel
+﻿@model HenriJervsonGrainWarehouse.Models.Cargo
 
 @{
     ViewData["Title"] = "SendMass";
@@ -12,10 +12,10 @@
     <div class="col-md-4">
         <form asp-action="UpdateCargoLeavingMass">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-control" >
-            <select asp-for="CarNumber" asp-items="Model.CarNumber">
-                <option value="">Car Number</option>
-            </select>
+            <div class="form-group">
+                <label asp-for="CarNumber" class="control-label"></label>
+                <input asp-for="CarNumber" class="form-control" />
+                <span asp-validation-for="CarNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LeavingMass" class="control-label"></label>
