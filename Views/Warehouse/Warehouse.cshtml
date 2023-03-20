@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HenriJervsonGrainWarehouse.Models.Cargo>
+﻿@model IEnumerable<HenriJervsonGrainWarehouse.Models.WarehouseViewModel>
 
 @{
     ViewData["Title"] = "Warehouse";
@@ -7,7 +7,14 @@
 <h1>Warehouse</h1>
 <h4>All Data about Entering And Leaving Cargo Is Shown Here</h4>
 
-
+<form asp-controller="Warehouse" asp-action="Index" method="get">
+    <p>
+        <label for="CarNumber">Car Number:</label>
+        <select asp-for="CarNumber" asp-items="Model.CarNumber">
+            <option value="">All</option>
+        </select>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

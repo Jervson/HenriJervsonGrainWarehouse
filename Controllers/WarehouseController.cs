@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using HenriJervsonGrainWarehouse.Data;
 using HenriJervsonGrainWarehouse.Models;
 using System.Net.NetworkInformation;
+using System.Collections.Generic;
 
 namespace HenriJervsonGrainWarehouse.Controllers
 {
@@ -21,7 +21,29 @@ namespace HenriJervsonGrainWarehouse.Controllers
             _context = context;
             _cargoRepository = cargoRepository;
         }
+        [HttpGet]
+        public async Task<IActionResult> Index(string CarNumber)
+        {
+            IQueryable<string> genreQuery = from m in _context.Cargo
+                                            orderby m.CarNumber
+                                            select m.CarNumber;
 
+            var cargos = from m in _context.Cargo
+                        select m;
+
+            if (!string.IsNullOrEmpty(CarNumber))
+            {
+                cargos = cargos.Where(x => x.CarNumber == CarNumber);
+            }
+
+            var WarehouseVM = new WarehouseViewModel
+            {
+                CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Cargos = await cargos.ToListAsync()
+            };
+
+            return View(WarehouseVM);
+        }
         // GET: Warehouse
 
 
