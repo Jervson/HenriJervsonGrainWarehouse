@@ -1,20 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\opilane\\projects\\HenriJervsonGrainWarehouse-86f8cd01373e68747ba27a7f902972f495e6241d\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj": {}
+    "C:\\Users\\opilane\\Source\\Repos\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\opilane\\projects\\HenriJervsonGrainWarehouse-86f8cd01373e68747ba27a7f902972f495e6241d\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj": {
+    "C:\\Users\\opilane\\Source\\Repos\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\opilane\\projects\\HenriJervsonGrainWarehouse-86f8cd01373e68747ba27a7f902972f495e6241d\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj",
+        "projectUniqueName": "C:\\Users\\opilane\\Source\\Repos\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj",
         "projectName": "HenriJervsonGrainWarehouse",
-        "projectPath": "C:\\Users\\opilane\\projects\\HenriJervsonGrainWarehouse-86f8cd01373e68747ba27a7f902972f495e6241d\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj",
+        "projectPath": "C:\\Users\\opilane\\Source\\Repos\\HenriJervsonGrainWarehouse\\HenriJervsonGrainWarehouse.csproj",
         "packagesPath": "C:\\Users\\opilane\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\opilane\\projects\\HenriJervsonGrainWarehouse-86f8cd01373e68747ba27a7f902972f495e6241d\\HenriJervsonGrainWarehouse\\obj\\",
+        "outputPath": "C:\\Users\\opilane\\Source\\Repos\\HenriJervsonGrainWarehouse\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\opilane\\AppData\\Roaming\\NuGet\\NuGet.Config",

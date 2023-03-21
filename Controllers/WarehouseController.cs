@@ -44,7 +44,7 @@ namespace HenriJervsonGrainWarehouse.Controllers
         {
             return _context.Cargo.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> Warehouse([Bind] string CarNumber)
+        public async Task<IActionResult> WarehouseView([Bind] string CarNumber)
         {
             var applicationDbContext = _context
                             .Cargo
@@ -65,7 +65,7 @@ namespace HenriJervsonGrainWarehouse.Controllers
 
             var warehouseVM = new WarehouseViewModel
             {
-                CarNumber = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                CarNumbers = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 Cargos = await cargos.ToListAsync()
 
             };
