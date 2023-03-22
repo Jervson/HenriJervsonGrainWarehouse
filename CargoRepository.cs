@@ -7,6 +7,7 @@ namespace HenriJervsonGrainWarehouse.Models
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public class CargoRepository
     {
@@ -42,7 +43,20 @@ namespace HenriJervsonGrainWarehouse.Models
         public void UpdateCargoLeavingMass(string carNumber, double leavingMass)
         {
             var cargo = _context.Cargo.Where(x => x.CarNumber == carNumber).Where(y => y.LeavingMass == null).FirstOrDefault();
-            cargo.LeavingMass = leavingMass;
+            if (cargo != null)
+            {
+                cargo.LeavingMass = leavingMass;
+            }
+            else
+            {
+                cargo = new Cargo
+                {
+                    CarNumber = carNumber,
+                    EnteringMass = 0,
+                    LeavingMass = leavingMass
+                };
+                _context.Cargo.Add(cargo);
+            }
             _context.SaveChanges();
         }
         public List<Cargo> GetAllCargo()
