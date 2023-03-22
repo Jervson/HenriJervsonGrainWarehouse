@@ -8,6 +8,5 @@ namespace HenriJervsonGrainWarehouse.Models
         public List<Cargo> Cargos { get; set; }
         public SelectList CarNumbers { get; set; }
         public string CarNumber { get; set; }
-        public double TotalMass { get; set; }
     }
 }

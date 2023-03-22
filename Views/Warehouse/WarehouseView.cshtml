@@ -36,27 +36,27 @@
         </tr>
     </thead>
     <tbody>
-            @foreach (var item in Model.Cargos!)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CarNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EnteringMass)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeavingMass)
-                    </td>
-                </tr>
-            }
-            @foreach (var item in Model.Cargos)
-            {
-                <tr>              
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalMass)
-                    </td>
-                </tr>
-            }
+        @foreach (var item in Model.Cargos!)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnteringMass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeavingMass)
+                </td>
+            </tr>
+        }
+        @foreach (var item in Model.Cargos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalMass)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
