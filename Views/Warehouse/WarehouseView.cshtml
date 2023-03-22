@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cargos![0].LeavingMass)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalMass)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +47,14 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LeavingMass)
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model.Cargos)
+            {
+                <tr>              
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalMass)
                     </td>
                 </tr>
             }

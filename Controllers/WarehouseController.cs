@@ -62,13 +62,20 @@ namespace HenriJervsonGrainWarehouse.Controllers
                 cargos = cargos.Where(x => x.CarNumber == CarNumber);
             }
 
-
             var warehouseVM = new WarehouseViewModel
             {
                 CarNumbers = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Cargos = await cargos.ToListAsync()
-
+                Cargos = await cargos.ToListAsync(),
             };
+            var enteringMasses = from c in cargos
+                                 where c.CarNumber == CarNumber
+                                 select c.EnteringMass;
+
+            var leavingMasses = from c in cargos
+                                where c.CarNumber == CarNumber
+                                select c.LeavingMass;
+
+            double totalMass = (double)(enteringMasses.Sum() - leavingMasses.Sum());
 
             return View(warehouseVM);
         }

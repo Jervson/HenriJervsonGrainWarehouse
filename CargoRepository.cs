@@ -20,6 +20,11 @@ namespace HenriJervsonGrainWarehouse.Models
 
         public void AddCargo(string carNumber, double enteringMass)
         {
+            var Levcargo = _context.Cargo.Where(x => x.CarNumber == carNumber).Where(y => y.LeavingMass == null).FirstOrDefault();
+            if (Levcargo != null)
+            {
+                Levcargo.LeavingMass = 4;
+            }
             var cargo = new Cargo
             {
                 CarNumber = carNumber,
@@ -52,7 +57,7 @@ namespace HenriJervsonGrainWarehouse.Models
                 cargo = new Cargo
                 {
                     CarNumber = carNumber,
-                    EnteringMass = 0,
+                    EnteringMass = 4,
                     LeavingMass = leavingMass
                 };
                 _context.Cargo.Add(cargo);
