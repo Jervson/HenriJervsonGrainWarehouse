@@ -29,34 +29,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cargos![0].LeavingMass)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalMass)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Cargos!)
+        @foreach (var cargo in Model.Cargos)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CarNumber)
+                    @Html.DisplayFor(modelItem => cargo.CarNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EnteringMass)
+                    @Html.DisplayFor(modelItem => cargo.EnteringMass)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LeavingMass)
+                    @Html.DisplayFor(modelItem => cargo.LeavingMass)
                 </td>
             </tr>
         }
-        @foreach (var item in Model.Cargos)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalMass)
-                </td>
-            </tr>
-        }
+        <tr>
+            <td>
+                Total Mass:
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.TotalMass)
+            </td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
