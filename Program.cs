@@ -5,39 +5,20 @@ using HenriJervsonGrainWarehouse;
 using HenriJervsonGrainWarehouse.Models;
 using HenriJervsonGrainWarehouse.Data;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionString")));
-builder.Services.AddScoped<CargoRepository>(provider =>
+namespace HenriJervsonGrainWarehouse
 {
-    var options = provider.GetRequiredService<DbContextOptions<MyDbContext>>();
-    return new CargoRepository(options);
-});
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-var app = builder.Build();
-
-// Add middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-}
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
-
-app.Run();
