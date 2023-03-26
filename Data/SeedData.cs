@@ -8,7 +8,7 @@ namespace HenriJervsonGrainWarehouse.Data
         public const string ROLE_ADMIN = "Admin";
         public static async Task SeedIdentity(UserManager<WarehouseUser> userManager, RoleManager<WarehouseRole> roleManager)
         {
-            var user = await userManager.FindByNameAsync("admin@DanceCompetition.com");
+            var user = await userManager.FindByNameAsync("admin@GrainwareHouse.com");
             if (user == null)
             {
                 user = new WarehouseUser();

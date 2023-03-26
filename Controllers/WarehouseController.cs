@@ -8,6 +8,8 @@ using HenriJervsonGrainWarehouse.Data;
 using HenriJervsonGrainWarehouse.Models;
 using System.Net.NetworkInformation;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HenriJervsonGrainWarehouse.Controllers
 {
@@ -44,6 +46,8 @@ namespace HenriJervsonGrainWarehouse.Controllers
         {
             return _context.Cargo.Any(e => e.Id == id);
         }
+
+        [Authorize(Roles = SeedData.ROLE_ADMIN)]
         public async Task<IActionResult> WarehouseView([Bind] string CarNumber)
         {
             var applicationDbContext = _context
