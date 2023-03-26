@@ -2,7 +2,9 @@
 using HenriJervsonGrainWarehouse;
 using HenriJervsonGrainWarehouse.Models;
 using HenriJervsonGrainWarehouse.Data;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HenriJervsonGrainWarehouse
 {
@@ -16,11 +18,13 @@ namespace HenriJervsonGrainWarehouse
             _cargoRepository = cargoRepository;
         }
 
+        [Authorize(Roles = SeedData.ROLE_ADMIN)]
         public IActionResult AddCargo()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = SeedData.ROLE_ADMIN)]
         public IActionResult AddCargo(string carNumber, double enteringMass)
         {
             if (ModelState.IsValid)
@@ -31,12 +35,14 @@ namespace HenriJervsonGrainWarehouse
             }
             return View();
         }
+        [Authorize(Roles = SeedData.ROLE_ADMIN)]
         public IActionResult UpdateCargoLeavingMass()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = SeedData.ROLE_ADMIN)]
         public IActionResult UpdateCargoLeavingMass(string carNumber, double leavingMass)
         {
             if (ModelState.IsValid)
