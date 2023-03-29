@@ -65,8 +65,8 @@ namespace HenriJervsonGrainWarehouse.Controllers
             {
                 cargos = cargos.Where(x => x.CarNumber == CarNumber);
             }
-            var cargobroughted = await _context.Cargo.ToListAsync();
-            double totalMass = cargobroughted.AsEnumerable().Select(c => c.CargoBrought ?? 0).Sum();
+            var cargobrought = await _context.Cargo.ToListAsync();
+            double totalMass = cargobrought.AsEnumerable().Select(c => c.CargoBrought ?? 0).Sum();
 
             var warehouseVM = new WarehouseViewModel
             {
