@@ -65,8 +65,22 @@ namespace HenriJervsonGrainWarehouse.Controllers
             {
                 cargos = cargos.Where(x => x.CarNumber == CarNumber);
             }
-            var cargobrought = await _context.Cargo.ToListAsync();
-            double totalMass = cargobrought.AsEnumerable().Select(c => c.CargoBrought ?? 0).Sum();
+
+            double totalMass;
+            if (!string.IsNullOrEmpty(CarNumber))
+            {
+                var cargobrought = await _context.Cargo
+                    .Where(x => x.CarNumber == CarNumber)
+                    .ToListAsync();
+                totalMass = cargobrought.Select(c => c.CargoBrought ?? 0).Sum();
+            }
+            else
+            {
+                var cargobrought = await _context.Cargo
+                    .Select(x => x.CargoBrought)
+                    .ToListAsync();
+                totalMass = cargobrought.Sum(c => c ?? 0);
+            }
 
             var warehouseVM = new WarehouseViewModel
             {
